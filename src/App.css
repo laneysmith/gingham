@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#controls {
+  min-width: 280px;
+  background: #242424;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.control-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  height: 1.5em;
+}

@@ -1,0 +1,133 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #efefef;
+  background-color: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --accent-color: #1C6D7E;
+  --border-color: grey;
+  --border-radius: 8px;
+  --inner-border-radius: 4px;
+  --control-height: 2.5rem;
+  --control-margin: 0.25rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+a {
+  font-weight: 500;
+  color: var(--accent-color);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--accent-color);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+input, button {
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #1a1a1a;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #efefef;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 0.5em;
+  margin: var(--control-margin) 0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  height: var(--control-height);
+}
+button:hover {
+  border-color: var(--accent-color);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.full-width {
+  width: 100%;
+}
+
+input[type="number"] {
+  color: #efefef;
+  height: var(--control-height);
+  width: 4rem;
+  padding: 0.5em;
+  margin: var(--control-margin) 0;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.25s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type="color"] {
+  height: var(--control-height);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.25s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+input[type="color"]:hover {
+  border-color: var(--accent-color);
+}
+input[type="color"]:focus,
+input[type="color"]:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+input[type="color"]::-webkit-color-swatch {
+  border-radius: var(--inner-border-radius);
+  border: none;
+}
+input[type="color"]::-moz-color-swatch {
+  border-radius: var(--inner-border-radius);
+  border: none;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+label:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
