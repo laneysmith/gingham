@@ -30,7 +30,7 @@ function CopyButton(props: Props) {
         <img
           src={isCopying ? clipboardCheckIcon : clipboardIcon}
           className="icon"
-          alt="Remove icon"
+          role="presentation"
         />
       </button>
     </>
