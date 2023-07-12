@@ -1,12 +1,14 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import "./App.css";
 import generateCSS from "./utils/generateCSS";
+import randomize from "./utils/randomize";
 import sampleColors from "./constants/samplePalettes";
 import trashIcon from "./assets/trashIcon.svg";
+import refreshIcon from "./assets/refreshIcon.svg";
 import CodeBlock from "./CopyButton";
 
 function App() {
-  const [colors, setColors] = useState<string[]>(sampleColors[0]);
+  const [colors, setColors] = useState<string[]>(randomize(sampleColors));
   const [opacity, setOpacity] = useState<number>(60);
   const [size, setSize] = useState<number>(85);
   const [code, setCode] = useState<string>("");
@@ -52,6 +54,11 @@ function App() {
     setOpacity(newValue);
   };
 
+  const randomizePalette = useCallback(
+    () => setColors(randomize(sampleColors)),
+    []
+  );
+
   return (
     <>
       <div id="controls">
@@ -81,6 +88,10 @@ function App() {
         <button className="full-width" onClick={addColor}>
           Add Color
         </button>
+        <button className="full-width" onClick={randomizePalette}>
+          Randomize Palette&nbsp;
+          <img src={refreshIcon} className="icon" alt="Refresh icon" />
+        </button>
         {colors.map((color, index) => {
           return (
             <div className="control-option" key={index}>
@@ -98,7 +109,7 @@ function App() {
                 disabled={colors.length < 2}
                 aria-label="Remove"
               >
-                <img src={trashIcon} className="icon" alt="Remove" />
+                <img src={trashIcon} className="icon" alt="Remove icon" />
               </button>
             </div>
           );
