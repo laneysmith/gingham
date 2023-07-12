@@ -48,19 +48,18 @@ input, button {
   font-size: 1em;
   font-weight: 500;
   background-color: #1a1a1a;
+  cursor: pointer;
+  color: #efefef;
 }
 
 button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #efefef;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   padding: 0.5em;
   margin: var(--control-margin) 0;
-  font-family: inherit;
-  cursor: pointer;
   transition: border-color 0.25s;
   height: var(--control-height);
 }
@@ -71,13 +70,16 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
 
 .full-width {
   width: 100%;
 }
 
 input[type="number"] {
-  color: #efefef;
   height: var(--control-height);
   width: 4rem;
   padding: 0.5em;
@@ -88,8 +90,6 @@ input[type="number"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: transparent;
-  cursor: pointer;
 }
 
 input[type="color"] {
@@ -100,8 +100,6 @@ input[type="color"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: transparent;
-  cursor: pointer;
 }
 input[type="color"]:hover {
   border-color: var(--accent-color);
