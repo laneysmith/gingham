@@ -6,7 +6,7 @@ interface Props {
   code: string;
 }
 
-function CodeBlock(props: Props) {
+function CopyButton(props: Props) {
   const { code } = props;
   const [isCopying, setIsCopying] = useState<boolean>(false);
   const copyToClipboard = useCallback(async () => {
@@ -37,4 +37,4 @@ function CodeBlock(props: Props) {
   );
 }
 
-export default CodeBlock;
+export default CopyButton;

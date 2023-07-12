@@ -3,7 +3,7 @@ import "./App.css";
 import generateCSS from "./utils/generateCSS";
 import sampleColors from "./constants/samplePalettes";
 import trashIcon from "./assets/trashIcon.svg";
-import CodeBlock from "./CodeBlock";
+import CodeBlock from "./CopyButton";
 
 function App() {
   const [colors, setColors] = useState<string[]>(sampleColors[0]);
@@ -83,7 +83,7 @@ function App() {
         </button>
         {colors.map((color, index) => {
           return (
-            <div className="control-option" key={`${index}-${color}`}>
+            <div className="control-option" key={index}>
               <label>
                 <input
                   type="color"
