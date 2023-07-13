@@ -2,14 +2,14 @@ import { useState, useEffect, ChangeEvent, useCallback, useMemo } from "react";
 import "./App.css";
 import generateCSS from "./utils/generateCSS";
 import randomize from "./utils/randomize";
-import sampleColors from "./constants/samplePalettes";
+import palettes from "./constants/palettes";
 import trashIcon from "./assets/trashIcon.svg";
 import paintRollerIcon from "./assets/paintRollerIcon.svg";
 import refreshIcon from "./assets/refreshIcon.svg";
 import CodeBlock from "./CopyButton";
 
 function App() {
-  const initialColors = useMemo(() => randomize(sampleColors), []);
+  const initialColors = useMemo(() => randomize(palettes), []);
   const [colors, setColors] = useState<string[]>(initialColors);
   const [opacity, setOpacity] = useState<number>(60);
   const [size, setSize] = useState<number>(85);
@@ -57,7 +57,7 @@ function App() {
   };
 
   const randomizePalette = useCallback(
-    () => setColors(randomize(sampleColors)),
+    () => setColors(randomize(palettes)),
     []
   );
 
