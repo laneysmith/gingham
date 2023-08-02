@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, useCallback, useMemo } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd-multi-backend";
+import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import "./App.css";
 import { Color } from "./types";
 import generateCSS from "./utils/generateCSS";
@@ -133,7 +133,7 @@ function App() {
           Randomize Palette&nbsp;
           <img src={refreshIcon} className="icon" role="presentation" />
         </button>
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider options={HTML5toTouch}>
           <ul className="unstyled-list">
             {colors.map((color, index) => {
               return (
