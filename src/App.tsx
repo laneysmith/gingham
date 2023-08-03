@@ -134,7 +134,7 @@ function App() {
           <img src={refreshIcon} className="icon" role="presentation" />
         </button>
         <DndProvider options={HTML5toTouch}>
-          <ul className="unstyled-list">
+          <ol role="listbox" className="unstyled-list">
             {colors.map((color, index) => {
               return (
                 <ColorRow
@@ -148,7 +148,7 @@ function App() {
                 />
               );
             })}
-          </ul>
+          </ol>
         </DndProvider>
         <CopyButton code={code} />
         <div className="footer">

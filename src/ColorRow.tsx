@@ -85,6 +85,9 @@ function ColorRow(props: Props) {
     <li
       ref={ref}
       key={index}
+      role="option"
+      draggable="true"
+      tabIndex={0}
       className="control-option"
       style={{ opacity: isDragging ? 0 : 1 }}
       data-handler-id={handlerId}
@@ -93,6 +96,7 @@ function ColorRow(props: Props) {
         src={reorderIcon}
         className="icon reorder-icon"
         role="presentation"
+        draggable="false"
       />
       <label className="color-label">
         <input
