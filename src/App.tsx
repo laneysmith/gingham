@@ -1,23 +1,33 @@
 import { useState, useEffect, ChangeEvent, useCallback, useMemo } from "react";
+import { DndProvider } from "react-dnd-multi-backend";
+import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import "./App.css";
+import { Color } from "./types";
 import generateCSS from "./utils/generateCSS";
 import randomize from "./utils/randomize";
 import palettes from "./constants/palettes";
-import trashIcon from "./assets/trashIcon.svg";
 import paintRollerIcon from "./assets/paintRollerIcon.svg";
 import refreshIcon from "./assets/refreshIcon.svg";
-import CodeBlock from "./CopyButton";
+import CopyButton from "./CopyButton";
+import ColorRow from "./ColorRow";
+import {
+  colorToColorType,
+  colorListToColorTypeList,
+} from "./utils/toColorType";
 
 function App() {
-  const initialColors = useMemo(() => randomize(palettes), []);
-  const [colors, setColors] = useState<string[]>(initialColors);
+  const initialColors = useMemo(
+    () => colorListToColorTypeList(randomize(palettes)),
+    []
+  );
+  const [colors, setColors] = useState<Color[]>(initialColors);
   const [opacity, setOpacity] = useState<number>(60);
   const [size, setSize] = useState<number>(85);
   const [code, setCode] = useState<string>("");
 
   useEffect(() => {
     const { backgroundImage, backgroundSize } = generateCSS({
-      colors,
+      colors: colors.map(({ color }) => color),
       opacity,
       size,
     });
@@ -28,36 +38,64 @@ function App() {
     );
   }, [colors, size, opacity]);
 
-  const addColor = () => setColors((prevColors) => [...prevColors, "#FFFFFF"]);
-  const removeColor = (index: number) =>
-    setColors((prevColors) => [
-      ...prevColors.slice(0, index),
-      ...prevColors.slice(index + 1),
-    ]);
-  const setColor = (event: ChangeEvent<HTMLInputElement>, index: number) => {
-    setColors((prevColors) => [
-      ...prevColors.slice(0, index),
-      event.target.value,
-      ...prevColors.slice(index + 1),
-    ]);
-  };
+  const addColor = useCallback(
+    () =>
+      setColors((prevColors) => [...prevColors, colorToColorType("#FFFFFF")]),
+    []
+  );
+  const removeColor = useCallback(
+    (index: number) =>
+      setColors((prevColors) => [
+        ...prevColors.slice(0, index),
+        ...prevColors.slice(index + 1),
+      ]),
+    []
+  );
+  const updateColor = useCallback(
+    (event: ChangeEvent<HTMLInputElement>, index: number) => {
+      setColors((prevColors: Color[]) => [
+        ...prevColors.slice(0, index),
+        { ...prevColors[index], color: event.target.value },
+        ...prevColors.slice(index + 1),
+      ]);
+    },
+    []
+  );
+  const moveColor = useCallback((dragIndex: number, hoverIndex: number) => {
+    setColors((prevColors: Color[]) => {
+      const newArray = [...prevColors];
+      const target = newArray[dragIndex];
+      const inc = hoverIndex < dragIndex ? -1 : 1;
+      for (let i = dragIndex; i !== hoverIndex; i += inc) {
+        newArray[i] = newArray[i + inc];
+      }
+      newArray[hoverIndex] = target;
+      return newArray;
+    });
+  }, []);
 
-  const handleChangeSize = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, min } = event.target;
-    const newValue = Math.max(Number(min), Number(value));
-    setSize(newValue);
-  };
-  const handleChangeOpacity = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, min, max } = event.target;
-    const newValue = Math.max(
-      Number(min),
-      Math.min(Number(max), Number(value))
-    );
-    setOpacity(newValue);
-  };
+  const handleChangeSize = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value, min } = event.target;
+      const newValue = Math.max(Number(min), Number(value));
+      setSize(newValue);
+    },
+    []
+  );
+  const handleChangeOpacity = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value, min, max } = event.target;
+      const newValue = Math.max(
+        Number(min),
+        Math.min(Number(max), Number(value))
+      );
+      setOpacity(newValue);
+    },
+    []
+  );
 
   const randomizePalette = useCallback(
-    () => setColors(randomize(palettes)),
+    () => setColors(colorListToColorTypeList(randomize(palettes))),
     []
   );
 
@@ -95,29 +133,33 @@ function App() {
           Randomize Palette&nbsp;
           <img src={refreshIcon} className="icon" role="presentation" />
         </button>
-        {colors.map((color, index) => {
-          return (
-            <div className="control-option" key={index}>
-              <label>
-                <input
-                  type="color"
-                  name="color"
-                  value={color}
-                  onChange={(event) => setColor(event, index)}
+        <DndProvider options={HTML5toTouch}>
+          <ol role="listbox" className="unstyled-list">
+            {colors.map((color, index) => {
+              return (
+                <ColorRow
+                  key={color.key}
+                  index={index}
+                  color={color.color}
+                  updateColor={updateColor}
+                  moveColor={moveColor}
+                  removeColor={removeColor}
+                  disableRemove={colors.length < 2}
                 />
-                &nbsp; {color.toUpperCase()}
-              </label>
-              <button
-                onClick={() => removeColor(index)}
-                disabled={colors.length < 2}
-                aria-label="Remove"
-              >
-                <img src={trashIcon} className="icon" role="presentation" />
-              </button>
-            </div>
-          );
-        })}
-        <CodeBlock code={code} />
+              );
+            })}
+          </ol>
+        </DndProvider>
+        <CopyButton code={code} />
+        <div className="footer">
+          <a
+            href="https://github.com/laneysmith/gingham"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </a>
+        </div>
       </div>
     </>
   );

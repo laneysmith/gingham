@@ -1,0 +1,13 @@
+.color-label {
+  flex: 1;
+}
+
+.reorder-icon {
+  padding-right: 0.5rem;
+}
+.reorder-icon:hover {
+  cursor: grab;
+}
+.reorder-icon:active {
+  cursor: grabbing;
+}
