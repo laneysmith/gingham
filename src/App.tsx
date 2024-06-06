@@ -15,28 +15,29 @@ import {
   colorListToColorTypeList,
 } from "./utils/toColorType";
 
+const DEFAULT_OPACITY = 60;
+
 function App() {
   const initialColors = useMemo(
     () => colorListToColorTypeList(randomize(palettes)),
     []
   );
   const [colors, setColors] = useState<Color[]>(initialColors);
-  const [opacity, setOpacity] = useState<number>(60);
-  const [size, setSize] = useState<number>(85);
+  const [size, setSize] = useState<number>(20);
   const [code, setCode] = useState<string>("");
 
   useEffect(() => {
     const { backgroundImage, backgroundSize } = generateCSS({
       colors: colors.map(({ color }) => color),
-      opacity,
-      size,
+      opacity: DEFAULT_OPACITY,
+      size: size * colors.length,
     });
     document.body.style.backgroundImage = backgroundImage;
     document.body.style.backgroundSize = backgroundSize;
     setCode(
       `background-image: ${backgroundImage}, background-size: ${backgroundSize}`
     );
-  }, [colors, size, opacity]);
+  }, [colors, size]);
 
   const addColor = useCallback(
     () =>
@@ -82,17 +83,6 @@ function App() {
     },
     []
   );
-  const handleChangeOpacity = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { value, min, max } = event.target;
-      const newValue = Math.max(
-        Number(min),
-        Math.min(Number(max), Number(value))
-      );
-      setOpacity(newValue);
-    },
-    []
-  );
 
   const randomizePalette = useCallback(
     () => setColors(colorListToColorTypeList(randomize(palettes))),
@@ -103,7 +93,7 @@ function App() {
     <>
       <div id="controls">
         <div className="control-option">
-          <label htmlFor="size">Size (px)</label>
+          <label htmlFor="size">Band size (px)</label>
           <input
             type="number"
             id="size"
@@ -113,24 +103,12 @@ function App() {
             onChange={handleChangeSize}
           />
         </div>
-        <div className="control-option">
-          <label htmlFor="opacity">Opacity (%)</label>
-          <input
-            type="number"
-            id="opacity"
-            name="opacity"
-            min="1"
-            max="100"
-            value={opacity}
-            onChange={handleChangeOpacity}
-          />
-        </div>
         <button className="full-width" onClick={addColor}>
-          Add a Color&nbsp;
+          Add a color&nbsp;
           <img src={paintRollerIcon} className="icon" role="presentation" />
         </button>
         <button className="full-width" onClick={randomizePalette}>
-          Randomize Palette&nbsp;
+          Randomize palette&nbsp;
           <img src={refreshIcon} className="icon" role="presentation" />
         </button>
         <DndProvider options={HTML5toTouch}>
