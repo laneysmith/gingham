@@ -7,7 +7,7 @@ import generateCSS from "./utils/generateCSS";
 import randomize from "./utils/randomize";
 import palettes from "./constants/palettes";
 import paintRollerIcon from "./assets/paintRollerIcon.svg";
-import refreshIcon from "./assets/refreshIcon.svg";
+import paletteIcon from "./assets/paletteIcon.svg";
 import CopyButton from "./CopyButton";
 import ColorRow from "./ColorRow";
 import {
@@ -109,7 +109,7 @@ function App() {
         </button>
         <button className="full-width" onClick={randomizePalette}>
           Randomize palette&nbsp;
-          <img src={refreshIcon} className="icon" role="presentation" />
+          <img src={paletteIcon} className="icon" role="presentation" />
         </button>
         <DndProvider options={HTML5toTouch}>
           <ol role="listbox" className="unstyled-list">
