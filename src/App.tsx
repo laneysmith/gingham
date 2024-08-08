@@ -30,7 +30,7 @@ function App() {
     const { backgroundImage, backgroundSize } = generateCSS({
       colors: colors.map(({ color }) => color),
       opacity: DEFAULT_OPACITY,
-      size: size * colors.length,
+      bandSize: size,
     });
     document.body.style.backgroundImage = backgroundImage;
     document.body.style.backgroundSize = backgroundSize;
