@@ -33,6 +33,15 @@ const FADED_PRIMARIES = [
   "#AA5555",
   "#FFFFFF",
 ];
+const WATERMELON = ["#5A966F", "#FFFFFF", "#E6A3BE", "#FFFFFF"];
+const BLUEBERRIES = [
+  "#61A9D2",
+  "#FFFFFF",
+  "#4F6C92",
+  "#FFFFFF",
+  "#BBBDE2",
+  "#FFFFFF",
+];
 export default [
   GO_LIGHTLY,
   PICNIC,
@@ -47,4 +56,6 @@ export default [
   PINK_PEACH,
   FADED_PRIMARIES,
   SKY,
+  WATERMELON,
+  BLUEBERRIES,
 ];

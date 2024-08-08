@@ -3,7 +3,7 @@ import hexToRGBA from "./hexToRGBA";
 interface GenerateCSSInput {
   colors: string[];
   opacity: number;
-  size: number;
+  bandSize: number;
 }
 
 interface GenerateCSSOutput {
@@ -14,14 +14,16 @@ interface GenerateCSSOutput {
 export default function generateCSS({
   colors,
   opacity,
-  size,
+  bandSize,
 }: GenerateCSSInput): GenerateCSSOutput {
   const colorCount = colors.length;
   const rgbaColors = colors.map((hexColor) => hexToRGBA(hexColor, opacity));
   if (colorCount < 2) {
-    rgbaColors.push("transparent");
+    // If there's only 1 color, add white
+    rgbaColors.push(hexToRGBA("#FFFFFFF", opacity));
   }
-  const interval = 100 / colorCount / 2;
+  const size = bandSize * rgbaColors.length;
+  const interval = 100 / rgbaColors.length / 2;
   const intervals = (interval: number) => {
     const temp = [];
     const endTemp = [];
