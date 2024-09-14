@@ -90,56 +90,54 @@ function App() {
   );
 
   return (
-    <>
-      <div id="controls">
-        <div className="control-option">
-          <label htmlFor="size">Band size (px)</label>
-          <input
-            type="number"
-            id="size"
-            name="size"
-            min="1"
-            value={size}
-            onChange={handleChangeSize}
-          />
-        </div>
-        <button className="full-width" onClick={addColor}>
-          Add a color&nbsp;
-          <img src={paintRollerIcon} className="icon" role="presentation" />
-        </button>
-        <button className="full-width" onClick={randomizePalette}>
-          Randomize palette&nbsp;
-          <img src={paletteIcon} className="icon" role="presentation" />
-        </button>
-        <DndProvider options={HTML5toTouch}>
-          <ol role="listbox" className="unstyled-list">
-            {colors.map((color, index) => {
-              return (
-                <ColorRow
-                  key={color.key}
-                  index={index}
-                  color={color.color}
-                  updateColor={updateColor}
-                  moveColor={moveColor}
-                  removeColor={removeColor}
-                  disableRemove={colors.length < 2}
-                />
-              );
-            })}
-          </ol>
-        </DndProvider>
-        <CopyButton code={code} />
-        <div className="footer">
-          <a
-            href="https://github.com/laneysmith/gingham"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub
-          </a>
-        </div>
+    <div id="controls">
+      <div className="control-option">
+        <label htmlFor="size">Band size (px)</label>
+        <input
+          type="number"
+          id="size"
+          name="size"
+          min="1"
+          value={size}
+          onChange={handleChangeSize}
+        />
       </div>
-    </>
+      <button className="full-width" onClick={addColor}>
+        Add a color&nbsp;
+        <img src={paintRollerIcon} className="icon" role="presentation" />
+      </button>
+      <button className="full-width" onClick={randomizePalette}>
+        Randomize palette&nbsp;
+        <img src={paletteIcon} className="icon" role="presentation" />
+      </button>
+      <DndProvider options={HTML5toTouch}>
+        <ol role="listbox" className="unstyled-list">
+          {colors.map((color, index) => {
+            return (
+              <ColorRow
+                key={color.key}
+                index={index}
+                color={color.color}
+                updateColor={updateColor}
+                moveColor={moveColor}
+                removeColor={removeColor}
+                disableRemove={colors.length < 2}
+              />
+            );
+          })}
+        </ol>
+      </DndProvider>
+      <CopyButton code={code} />
+      <div className="footer">
+        <a
+          href="https://github.com/laneysmith/gingham"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View on GitHub
+        </a>
+      </div>
+    </div>
   );
 }
 
