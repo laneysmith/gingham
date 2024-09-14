@@ -24,7 +24,7 @@ const AUTUMN = ["#CD9D9E", "#B64338", "#FAAA68", "#81A0D7", "#2A3352"];
 const SUNSET = ["#EAD1CC", "#AD4B67", "#FF8266", "#52A5FF", "#3D5C85"];
 const DYREHAVEN = ["#64725F", "#CEC2AC", "#5B7984", "#CEC2AC", "#CEC2AC"];
 const PINK_PEACH = ["#F4B976", "#FFFFFF", "#FFADAD", "#FFFFFF"];
-const SKY = ["#92D5E2", "#FBF8EF", "#69BFB9", "#FBF8EF"];
+// const SKY = ["#92D5E2", "#FBF8EF", "#69BFB9", "#FBF8EF"];
 const FADED_PRIMARIES = [
   "#1C6D7E",
   "#FFFFFF",
