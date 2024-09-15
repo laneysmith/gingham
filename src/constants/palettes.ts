@@ -42,6 +42,18 @@ const BLUEBERRIES = [
   "#BBBDE2",
   "#FFFFFF",
 ];
+const RAINBOW = [
+  "#F49280",
+  "#FFFFFF",
+  "#EA9A4C",
+  "#FFFFFF",
+  "#A0D39F",
+  "#FFFFFF",
+  "#79BBC8",
+  "#FFFFFF",
+  "#B898D7",
+  "#FFFFFF",
+];
 export default [
   GO_LIGHTLY,
   PICNIC,
@@ -58,4 +70,5 @@ export default [
   SKY,
   WATERMELON,
   BLUEBERRIES,
+  RAINBOW,
 ];
